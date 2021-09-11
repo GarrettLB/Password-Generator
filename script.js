@@ -3,6 +3,9 @@ var generateBtn = document.querySelector("#generate");
 
 // Global Variables
 var newPass;
+var ranArray;
+var types;
+
 var lower;
 var upper;
 var numbers;
@@ -41,7 +44,7 @@ function getPassType() {
   while (lowerSelected == false && upperSelected == false && numSelected == false && specSelected == false) {
   
     // lower case prompt
-    let lower = Boolean(window.confirm("Would you like to include lower case letters in your password?\n(Ok for yes, Cancel for no)"));
+    lower = Boolean(window.confirm("Would you like to include lower case letters in your password?\n(Ok for yes, Cancel for no)"));
     if (lower) {
       alert("Lower case letters will be included in your password.")
       lowerSelected = true
@@ -51,7 +54,7 @@ function getPassType() {
     }
     
     // upper case prompt
-    let upper = Boolean(window.confirm("Would you like to include upper case letters in your password?\n(Ok for yes, Cancel for no)"));
+    upper = Boolean(window.confirm("Would you like to include upper case letters in your password?\n(Ok for yes, Cancel for no)"));
     if (upper) {
       alert("Upper case letters will be included in your password.")
       upperSelected = true
@@ -61,7 +64,7 @@ function getPassType() {
     }
     
     // numbers prompt
-    let numbers = Boolean(window.confirm("Would you like to include numbers in your password?\n(Ok for yes, Cancel for no)"));
+    numbers = Boolean(window.confirm("Would you like to include numbers in your password?\n(Ok for yes, Cancel for no)"));
     if (numbers) {
       alert("Numbers will be included in your password.")
       numSelected = true
@@ -71,7 +74,7 @@ function getPassType() {
     }
     
     // symbols prompt
-    let spec = Boolean(window.confirm("Would you like to include special characters in your password?\n(Ok for yes, Cancel for no)"));
+    spec = Boolean(window.confirm("Would you like to include special characters in your password?\n(Ok for yes, Cancel for no)"));
     if (spec) {
       alert("Special characters will be included in your password.")
       specSelected = true
@@ -89,45 +92,44 @@ function getPassType() {
 }
 // Generates password based on query
 function generatePassword(lower, upper, numbers, spec, long) {
-
+  
   // variables
   const specials = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
   newPass = []
-  var Counter = long
+  ranArray = []
+  types = []
 
   // while loop for pass length
-  while (Counter > 0) {
+  if (lower) {
+    ranArray.push(1)
+  }
+  if (upper) {
+    ranArray.push(2)
+  }
+  if (numbers) {
+    ranArray.push(3)
+  }
+  if (spec) {
+    ranArray.push(4)
+  }
+
+  for (var i = 0; i < long; i++) {
+    types += ranArray[(Math.floor(Math.random() * ranArray.length))]
+  }
+
+  for (var x of types) {
     
-    // if selected, characters log one at a time
-    if (lower == true) {
-      newPass += String.fromCharCode(Math.floor(Math.random() * 26) +97)
-      Counter -= 1
-      
-      // each log checked to ensure loop breaks
-      if (Counter == 0) {
-        break
-      }
+    if (x == 1) {
+      newPass += String.fromCharCode(Math.floor(Math.random() * 26) +97)    
     }
-    if (upper == true) {
-      newPass += String.fromCharCode(Math.floor(Math.random() * 26) +65)
-      Counter -= 1
-      if (Counter == 0) {
-        break
-      }
+    if (x == 2) {
+      newPass += String.fromCharCode(Math.floor(Math.random() * 26) +65)    
     }
-    if (numbers == true) {
-      newPass += (Math.floor(Math.random() * 10))
-      Counter -= 1
-      if (Counter == 0) {
-        break
-      }
+    if (x == 3) {
+      newPass += (Math.floor(Math.random() * 10))    
     }
-    if (spec == true) {
-      newPass += specials[(Math.floor(Math.random() * specials.length))]
-      Counter -= 1
-      if (Counter == 0) {
-        break
-      }
+    if (x == 4) {
+      newPass += specials[(Math.floor(Math.random() * specials.length))]    
     }
   }
 }
