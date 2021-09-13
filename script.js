@@ -16,7 +16,7 @@ var long;
 function getPassType() {
 
   // prompt for pass length
-  long = Number(window.prompt("How many characters long would you like your password to be?", "(Plsease choose a number between 8 and 128)"));
+  long = Number(window.prompt("How many characters long would you like your password to be?", "(Please choose a number between 8 and 128)"));
   
   lengthSelected = false;
   
@@ -27,7 +27,7 @@ function getPassType() {
       lengthSelected = false;
       alert("Invalid Input!");
       long = Number(window.prompt("How many characters long would you like your password to be?", 
-                                        "(Plsease choose a number between 8 and 128)"));
+                                        "(Please choose a number between 8 and 128)"));
     } else {
       lengthSelected = true;
     }
@@ -40,7 +40,7 @@ function getPassType() {
   var numSelected = false
   var specSelected = false
 
-  // loop ensured at least one criteria is selected
+  // loop ensures at least one criteria is selected
   while (lowerSelected == false && upperSelected == false && numSelected == false && specSelected == false) {
   
     // lower case prompt
@@ -94,12 +94,13 @@ function getPassType() {
 function generatePassword(lower, upper, numbers, spec, long) {
   
   // variables
-  const specials = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+  const specials = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~"
   newPass = []
   ranArray = []
   types = []
 
-  // while loop for pass length
+  // if statements for character types
+  // pushes to ranArray if selected
   if (lower) {
     ranArray.push(1)
   }
@@ -113,10 +114,13 @@ function generatePassword(lower, upper, numbers, spec, long) {
     ranArray.push(4)
   }
 
+  // constructs a string using random number selections from ranArray
+  // string stored in var types
   for (var i = 0; i < long; i++) {
     types += ranArray[(Math.floor(Math.random() * ranArray.length))]
   }
 
+  // translates the numbers from (var types) to characters for final password
   for (var x of types) {
     
     if (x == 1) {
