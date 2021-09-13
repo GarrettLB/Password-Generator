@@ -7,4 +7,4 @@ Program generates a password based on specified length and selected character ty
 Screenshot:
 
 
-Link:
+Link:https://garrettlb.github.io/Password-Generator/
