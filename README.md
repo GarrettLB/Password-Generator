@@ -8,4 +8,4 @@ Screenshot:
 <img src="./assets/images/Screen Shot 2021-09-13 at 11.16.52 AM.png">
 
 
-Link:https://garrettlb.github.io/Password-Generator/
+Link: https://garrettlb.github.io/Prompt-Password-Generator/
